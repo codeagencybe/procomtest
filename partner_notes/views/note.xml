@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo>
+        <record model="ir.ui.view" id="view_note_note_form_inherit_partner">
+            <field name="name">note.note.form.inh.partner</field>
+            <field name="model">note.note</field>
+            <field name="inherit_id" ref="note.view_note_note_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='memo']" position="before">
+                		<group>
+                			<field name="partner_id" options="{'no_create': True,'no_edit': True, 'no_open': True}"/>
+                		</group>
+                </xpath>
+            </field>
+        </record>
+</odoo>

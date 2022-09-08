@@ -1,0 +1,26 @@
+<odoo>
+ 	<data>
+        <record model="ir.ui.view" id="view_sale_subscription_form">
+            <field name="name">sale.subscription.form</field>
+            <field name="model">sale.subscription</field>
+            <field name="inherit_id" ref="sale_subscription.sale_subscription_view_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="tag_ids" position="after">
+                    <field name="helpdesk_tag_ids" widget="many2many_tags"/>
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_sale_subscription_template_form">
+            <field name="name">sale.subscription.form</field>
+            <field name="model">sale.subscription.template</field>
+            <field name="inherit_id" ref="sale_subscription.sale_subscription_template_view_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="tag_ids" position="after">
+                    <field name="helpdesk_tag_ids" widget="many2many_tags"/>
+                </field>
+            </field>
+        </record>
+  	</data>
+</odoo>

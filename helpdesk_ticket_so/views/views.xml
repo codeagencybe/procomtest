@@ -1,0 +1,14 @@
+<odoo>
+	<data>
+		<record id="inherited_sale_order_view_form" model="ir.ui.view">
+            <field name="name">inherited.sale.order.view.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//header" position="inside">
+            		<button name="create_ticket_from_so" type="object" string="Create Ticket" class="btn-primary" attrs="{'invisible':[('ticket_id','!=',False)]}"/>
+            	</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

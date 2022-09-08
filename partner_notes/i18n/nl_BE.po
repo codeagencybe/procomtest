@@ -1,0 +1,63 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_notes
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-30 12:34+0000\n"
+"PO-Revision-Date: 2021-11-30 12:34+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_notes
+#: model:ir.model,name:partner_notes.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: partner_notes
+#: model:ir.model.fields,field_description:partner_notes.field_note_note__partner_id
+msgid "Customer"
+msgstr "Klant"
+
+#. module: partner_notes
+#: model:ir.model.fields,field_description:partner_notes.field_note_note__display_name
+#: model:ir.model.fields,field_description:partner_notes.field_res_partner__display_name
+msgid "Display Name"
+msgstr "Schermnaam"
+
+#. module: partner_notes
+#: model:ir.model.fields,field_description:partner_notes.field_note_note__id
+#: model:ir.model.fields,field_description:partner_notes.field_res_partner__id
+msgid "ID"
+msgstr ""
+
+#. module: partner_notes
+#: model:ir.model.fields,field_description:partner_notes.field_note_note____last_update
+#: model:ir.model.fields,field_description:partner_notes.field_res_partner____last_update
+msgid "Last Modified on"
+msgstr "Laatst gewijzigd op"
+
+#. module: partner_notes
+#: model:ir.model,name:partner_notes.model_note_note
+msgid "Note"
+msgstr "Notitie"
+
+#. module: partner_notes
+#: code:addons/partner_notes/models/partner.py:0
+#: model_terms:ir.ui.view,arch_db:partner_notes.view_res_partner_form_notes
+#, python-format
+msgid "Notes"
+msgstr "Opmerkingen"
+
+#. module: partner_notes
+#: model:ir.model.fields,field_description:partner_notes.field_res_brand__notes_number
+#: model:ir.model.fields,field_description:partner_notes.field_res_partner__notes_number
+#: model:ir.model.fields,field_description:partner_notes.field_res_users__notes_number
+msgid "Number of Notes"
+msgstr "Aantal notities"

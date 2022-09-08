@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+
+        <record model="ir.ui.view" id="subscription_freequency_list_view_list">
+            <field name="name">Subscription Frequency List View</field>
+            <field name="model">sale.subscription</field>
+            <field name="inherit_id" ref="sale_subscription.sale_subscription_view_list"/>
+            <field name="arch" type="xml">
+                <field name="recurring_total" position="before">
+                    <field name="frequency"/>
+                </field>
+          </field>
+        </record>
+    </data>
+</odoo>

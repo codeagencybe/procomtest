@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="inh_assets_common" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" />
+        </xpath>
+    </template>
+    <template id="custom_layout">
+        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-width: 200px;margin-top: 30px;" alt="Logo" />
+                </div>
+                <div class="col-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto" />
+            </div>
+        </div>
+        <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <div class="pt-5">
+                <!-- This div ensures that the address is not cropped by the header. -->
+                <t t-call="web.address_layout" />
+            </div>
+            <t t-raw="0" />
+        </div>
+        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+            <div class="row" style="font-size:14px;">
+                <div class="col-4" style="border-right: 3px solid #69328b;">
+                    <h5 style="color:#69328b;"><b>ProCom bv</b></h5>
+                    <span><i style="color:#69328b;" class="fas fa-book"/> BTW: BE0818.373.261</span><br/>
+                    <span><i style="color:#69328b;" class="fas fa-calculator" aria-hidden="true"/>IBAN: BE77 7512 1074 2442</span><br/>
+                    <span><i style="color:#69328b;" class="fas fa-life-ring" aria-hidden="true"/>info@procom.be <b style="color:#69328b;">. www.procom.be</b></span>
+                </div>
+                <div class="col-4" style="border-right: 3px solid #69328b;">
+                    <div style="margin-left:60px;">
+                        <span><i style="color:#69328b;" class="fas fa-map-marker" aria-hidden="true"/> Varkensmarkt 18</span><br/>
+                        <span>B-3590 Diepenbeek</span><br/>
+                        <span><i style="color:#69328b;" class="fas fa-phone" aria-hidden="true"/> 011 365 365</span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div style="margin-left:60px;">
+                        <span><i style="color:#69328b;" class="fas fa-map-marker" aria-hidden="true"/> Burg. Philipslaan 40</span><br/>
+                        <span>B-3680 Maaseik</span><br/>
+                        <span><i style="color:#69328b;" class="fas fa-phone" aria-hidden="true"/> 089 56 04 03</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="inh_report_saleorder_document" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//h2[@class='mt16']" position="replace">
+            <h2 class="mt20" style="color:#69328b;margin-top: 15px;">
+                <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                    <span t-if="doc.state not in ['draft','sent']">Order # </span>
+                    <span t-if="doc.state in ['draft','sent']">Quotation # </span>
+                </t>
+                <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                    <span>Pro-Forma Invoice # </span>
+                </t>
+                <span t-field="doc.name"/>
+            </h2>
+        </xpath>
+        <xpath expr="//div[@t-field='doc.partner_invoice_id']" position="replace">
+            <div style="margin-bottom: 20px;" t-field="doc.partner_invoice_id"
+                t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+        </xpath>
+    </template>
+</odoo>

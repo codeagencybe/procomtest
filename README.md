@@ -1,1 +1,1 @@
-# procomtest
+procom-odoo-apps

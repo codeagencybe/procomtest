@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_knowledge_base_category_public,access_knowledge_base_category_public,model_knowledge_base_category,base.group_user,1,1,1,0
+access_knowledge_base_category_admin,access_knowledge_base_category_admin,model_knowledge_base_category,base.group_system,1,1,1,1
+
+access_knowledge_base_tags_public,access_knowledge_base_tags_public,model_knowledge_base_tags,base.group_user,1,1,1,0
+access_knowledge_base_tags_admin,access_knowledge_base_tags_admin,model_knowledge_base_tags,base.group_system,1,1,1,1
+
+access_knowledge_base_info_public,access_knowledge_base_info_public,model_knowledge_base_info,base.group_user,1,1,1,0
+access_knowledge_base_info_admin,access_knowledge_base_info_admin,model_knowledge_base_info,base.group_system,1,1,1,1

@@ -1,0 +1,13 @@
+<odoo>
+	<data>
+
+		<template id="tidio_asset_backend" inherit_id="web.assets_backend">
+			<xpath expr="." position="inside">
+				<script type="text/javascript" src="/odoo_tidio_backend/static/src/js/navbar.js"/>
+				<script type="text/javascript" src="/odoo_tidio_backend/static/src/js/tidio.js"/>
+				<script src="//code.tidio.co/ijiiorbonjerphnrxzrgr6bskio8iw5k.js" async="async" groups="base.group_user"/>
+			</xpath>
+		</template>
+	 
+	</data>
+</odoo>

@@ -1,0 +1,42 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="inherited_sale_subscription">
+        <field name="name">sale.subscription.form.inherited</field>
+        <field name="model">sale.subscription</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_view_form"/>
+        <field name="arch" type="xml">
+            <field name="team_id" position="after">
+                <field name="memo"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sale_subscription_view_list">
+        <field name="name">sale.subscription.form.inherited</field>
+        <field name="model">sale.subscription</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_view_list"/>
+        <field name="arch" type="xml">
+            <field name="stage_id" position="before">
+                <field name="memo"/>
+                <field name="tag_ids" widget="many2many_tags"/>
+            </field>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="subscription_tags_details.action_subscription_tag">
+      <field name="name">Subscription Tags</field>
+      <field name="res_model">account.analytic.tag</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem name="Subscription Tags" id="subscription_tags_details.menu_subscription_tag" parent="sale_subscription.menu_sale_subscription_config"
+              action="subscription_tags_details.action_subscription_tag"/>
+
+  </data>
+</odoo>
