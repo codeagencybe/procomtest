@@ -1,0 +1,92 @@
+<odoo>
+	<data>   
+
+		<record id="inherited_helpdesk_ticket_view_form" model="ir.ui.view">
+            <field name="name">inherited.helpdesk.ticket.view.form</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//header" position="inside">
+            		<button name="create_so_from_ticket" type="object" string="Create Sale Order" attrs="{'invisible':[('is_close','=', False)]}"/>
+            		<field name="use_helpdesk_sale_timesheet" invisible="1"/>
+                    <button name="action_mark_as_done" string="Mark as Done" class="btn-primary" type="object" attrs="{'invisible':[('is_close','=', True)]}"></button>
+                    <field name="is_close" invisible="1"/>
+            	</xpath>
+                <field name="timesheet_ids" position="attributes">
+                    <attribute name="attrs">{'readonly':[('is_close','=', True)]}</attribute>
+                </field>
+			</field>
+		</record>
+
+        <record id="inherited_project_task_view_form" model="ir.ui.view">
+            <field name="name">inherited.project.task.view.form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//header" position="inside">
+            		<field name="create_direct_so" invisible="1"/>
+                    <field name="is_closed" invisible="1"/>
+            		<button name="create_so_from_ticket" attrs="{'invisible':[('create_direct_so','=', True), ('is_closed','=', False)]}" type="object" string="Create Sale Order"/>
+                    <button name="action_mark_as_done" string="Mark as Done" class="btn-primary" type="object" attrs="{'invisible':['|',('is_closed','=', True), '|', ('is_fsm', '=', True), ('display_mark_as_done_primary','=', True)]}"></button>
+            	</xpath>
+                <field name="timesheet_ids" position="attributes">
+                    <attribute name="attrs">{'readonly':[('is_closed','=', True)]}</attribute>
+                </field>
+			</field>
+		</record>
+		
+		<record id="inherited_sale_order_view_form" model="ir.ui.view">
+            <field name="name">inherited.sale.order.view.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+            	<field name="partner_id" position="after">
+            		<field name="ticket_id" attrs="{'invisible':[('ticket_id','=', False)]}"/>
+            	</field>
+			</field>
+		</record>
+
+        <record id="view_mark_done_wizard" model="ir.ui.view">
+            <field name="name">Task Mark Done Wizard</field>
+            <field name="model">ticket.task.mark.done.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Mark as Done">
+                    <group>
+                        <field name="task_id" invisible="1"/>
+                        <h6>Do you want to create Sale Order with marking as done?</h6>
+                    </group>
+                    <footer>
+                        <button name="action_task_create_so_and_done" string="Mark As Done &amp; Create SO" type="object" context="{'create_so':True}" class="btn-primary"/>
+                        <button name="action_task_mark_done" string="Only Mark As Done" type="object" class="btn-primary" context="{'create_so':False}"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                      </footer>
+                  </form>
+            </field>
+        </record>
+        <record id="view_mark_ticket_done_wizard" model="ir.ui.view">
+            <field name="name">Task Mark Done Wizard</field>
+            <field name="model">ticket.task.mark.done.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Mark as Done">
+                    <group>
+                        <field name="ticket_id" invisible="1"/>
+                        <h6>Do you want to create Sale Order with marking as done?</h6>
+                    </group>
+                    <footer>
+                        <button name="action_ticket_create_so_and_done" string="Mark As Done &amp; Create SO" type="object" context="{'create_so':True}" class="btn-primary"/>
+                        <button name="action_ticket_mark_done" string="Only Mark As Done" type="object" class="btn-primary" context="{'create_so':False}"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                      </footer>
+                  </form>
+            </field>
+        </record>
+        <record id="action_mark_done_wizard" model="ir.actions.act_window">
+            <field name="name">Task Mark Done Wizard Action</field>
+            <field name="res_model">ticket.task.mark.done.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_mark_done_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+	</data>
+</odoo>

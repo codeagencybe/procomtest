@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+         <template id="portal_sale_page_custom" name="Invoice Portal Template" inherit_id="sale.sale_order_portal_template">
+            <xpath expr="//div[hasclass('o_download_pdf')]" position="after">
+                <div class="o_download_pdf btn-toolbar flex-sm-nowrap">
+                    <div class="btn-group flex-grow-1 mb-1" t-if="sale_order.timesheet_count != 0">
+                        <form method="POST" action="/web/export/timesheet-xlsx">
+                            <input type="hidden" value="dummy-because-api-expects-one" name="token"/>
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" /> 
+                            <input type="hidden" name="order" t-att-value="sale_order.id"/>
+                            <button type="submit" class="btn btn-secondary btn-block" >
+                                <i class="fa fa-table"/> Timesheet XLS
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+        <template id="portal_invoice_page_custom" name="Invoice Portal Template" inherit_id="account.portal_invoice_page">
+            <xpath expr="//div[hasclass('o_download_pdf')]" position="after">
+                <div class="o_download_pdf btn-toolbar flex-sm-nowrap">
+                    <div class="btn-group flex-grow-1 mb-1" t-if="invoice.get_orders() and invoice.get_orders().timesheet_count != 0">
+                        <form method="POST" action="/web/export/timesheet-xlsx">
+                            <input type="hidden" value="dummy-because-api-expects-one" name="token"/>
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" /> 
+                            <input type="hidden" name="order" t-att-value="invoice.get_orders().id"/>
+                            <button type="submit" class="btn btn-secondary btn-block" >
+                                <i class="fa fa-table"/> Timesheet XLS
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+        <!-- <delete model="ir.ui.view" id="sale_timesheet.report_invoice_document"/> -->
+
+        <record model="ir.ui.view" id="sale_timesheet.report_invoice_document">
+            <field name="active" eval="False"/>
+        </record>
+
+        <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+            <xpath expr="//address" position="before">
+                <a style="position: fixed;top: 0;right: 20px;" class="btn btn-primary" t-if="report_type == 'html' and o.move_type == 'out_invoice' and o.state in ('draft', 'posted') and o.timesheet_count > 0" target="_blank" t-att-href="'/my/timesheets?search_in=invoice_id&amp;search=%s' % o.id">View Timesheets</a>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

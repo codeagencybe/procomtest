@@ -1,0 +1,85 @@
+<odoo>
+	<data>
+
+        <record model="ir.ui.view" id="view_helpdesk_ticket_tree">
+            <field name="name">helpdesk.ticket.form</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+		            <button name="view_knowledge_base" type="object" class="oe_stat_button" icon="fa-search icon">
+		                <div class="o_field_widget o_stat_info">
+		                    <span class="o_stat_text">Search</span>
+		                    <span class="o_stat_text">Q&amp;A</span>
+		                </div>
+		            </button>
+		            <button name="create_knowledge_base" type="object" class="oe_stat_button" icon="fa-plus icon">
+		                <div class="o_field_widget o_stat_info">
+		                    <span class="o_stat_text">Post</span>
+		                    <span class="o_stat_text">Q&amp;A</span>
+		                </div>
+		            </button>
+            	</xpath>
+            </field>
+		</record>
+		<record model="ir.ui.view" id="view_project_task_tree">
+		    <field name="name">project.task.form</field>
+		    <field name="model">project.task</field>
+		    <field name="inherit_id" ref="project.view_task_form2"/>
+		    <field name="type">form</field>
+		    <field name="arch" type="xml">
+		        <xpath expr="//div[@name='button_box']" position="inside">
+		            <button name="view_knowledge_base" type="object" class="oe_stat_button" icon="fa-search icon">
+		                <div class="o_field_widget o_stat_info">
+		                    <span class="o_stat_text">Search</span>
+		                    <span class="o_stat_text">Q&amp;A</span>
+		                </div>
+		            </button>
+		            <button name="create_knowledge_base" type="object" class="oe_stat_button" icon="fa-plus icon">
+		                <div class="o_field_widget o_stat_info">
+		                    <span class="o_stat_text">Post</span>
+		                    <span class="o_stat_text">Q&amp;A</span>
+		                </div>
+		            </button>
+		    	</xpath>
+		    	<xpath expr="//notebook" position="inside">
+	            	<page string="Knowledge Base">
+	            		<field name="kb_ids">
+	            			<tree>
+	            				<field name="name"/>
+							  	<field name="answer" invisible="1"/>
+								<field name="category_id"/>
+								<field name="tag_ids" options="{'color_field': 'color'}" widget="many2many_tags"/>
+								<button name="link_to_rec" type="object" string="Link to Ticket/Task"/>
+	            			</tree>
+	            		</field>
+	            	</page>
+	            </xpath>
+		    </field>
+		</record>
+
+		<record model="ir.ui.view" id="view_helpdesk_ticket_tree_with_notebook">
+            <field name="name">helpdesk.ticket.form</field>
+            <field name="model">helpdesk.ticket</field>
+		    <field name="inherit_id" ref="helpdesk_timesheet.helpdesk_ticket_view_form_inherit_helpdesk_timesheet"/>
+		    <field name="type">form</field>
+		    <field name="arch" type="xml">
+	            <xpath expr="//notebook" position="inside">
+	            	<page string="Knowledge Base">
+	            		<field name="kb_ids">
+	            			<tree>
+	            				<field name="name"/>
+							  	<field name="answer" invisible="1"/>
+								<field name="category_id"/>
+								<field name="tag_ids" options="{'color_field': 'color'}" widget="many2many_tags"/>
+								<button name="link_to_rec" type="object" string="Link to Ticket/Task"/>
+	            			</tree>
+	            		</field>
+	            	</page>
+	            </xpath>
+		    </field>
+		</record>
+
+	</data>
+</odoo>

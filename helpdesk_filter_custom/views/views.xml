@@ -1,0 +1,26 @@
+<odoo>
+  	<data>
+		<record id="helpdesk_tickets_view_search" model="ir.ui.view">
+	        <field name="name">helpdesk.ticket.search</field>
+	        <field name="model">helpdesk.ticket</field>
+	        <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_search"/>
+	        <field name="arch" type="xml">
+	            <xpath expr="//filter[@name='unassigned']" position="after">
+                	<separator/>
+                	<field name="is_tag_billable"/>
+	                <filter string="Billable w/o SO" name="billable" domain="[('is_tag_billable','=', True)]"/>
+	            </xpath>
+	        </field>
+	    </record>
+	    <record id="inherited_helpdesk_ticket_view_form" model="ir.ui.view">
+            <field name="name">inherited.helpdesk.ticket.view.form</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//header" position="inside">
+            		<field name="is_tag_billable" invisible="1"/>
+            	</xpath>
+            </field>
+        </record>
+	</data>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+   <t t-name="odoo_tidio_backend.chat_icon">
+       <li class="new_icon">
+           <label class="tidio_icon" style="margin-bottom:0px;" 
+            title="My Icon">
+              <div class="icon_div">
+                  <div class="toggle-icon" id="tidio-icon-box">
+                    <span id="fa-icon"></span>
+                  </div>
+              </div>
+           </label>
+       </li>
+   </t>
+</templates>

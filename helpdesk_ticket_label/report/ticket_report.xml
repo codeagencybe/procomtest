@@ -1,0 +1,52 @@
+<odoo>
+	<data>
+		<template id="report_helpdesk_simple_barcode_label">
+            <div style="width: 100%; display: inline-table; height: auto;">
+                <table class="table mb-0">
+                    <tr>
+                        <td class="text-center align-middle" style="border:none!important;">
+                            <t t-if="ticket.reference">
+                                <img alt="Barcode" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', quote_plus(ticket.id or ''), 600, 150)" style="width:100%;height:4rem"/>
+                                <span t-field="ticket.id"/><br></br>
+                                <t t-if="ticket.partner_id.parent_id">
+                                    <span t-field="ticket.partner_id.parent_id.name"/>
+                                </t>
+                                <t t-else="">
+                                    <span t-field="ticket.partner_id.name"/>
+                                </t>
+                                <br></br>
+                                <span t-field="ticket.partner_id.phone"/>
+                            </t>
+                            <t t-else=""><span class="text-muted">No Reference available</span></t>
+                        </td>
+                    </tr> 
+                </table>
+            </div>
+        </template>
+
+        <template id="report_helpdesk_ticket_barcode_template_label">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <t t-foreach="docs" t-as="ticket">
+                        <t t-call="helpdesk_ticket_label.report_helpdesk_simple_barcode_label">
+                            <t t-set="ticket" t-value="ticket"/>
+                        </t>
+                    </t>
+                </div>
+            </t>
+        </template>
+        <record id="action_report_helpdesk_ticket_reference_label" model="ir.actions.report">
+            <field name="name">Ticket Label</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">helpdesk_ticket_label.report_helpdesk_ticket_barcode_template_label</field>
+            <field name="report_file">helpdesk_ticket_label.report_helpdesk_ticket_barcode_template_label</field>
+            <field name="print_report_name">'Helpdesk Reference - %s' % (object.reference)</field>
+            <field name="binding_model_id" ref="helpdesk.model_helpdesk_ticket"/>
+            <field name="binding_type">report</field>
+        </record>     
+       
+       
+
+	</data>
+</odoo>

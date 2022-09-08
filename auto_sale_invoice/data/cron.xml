@@ -1,0 +1,16 @@
+<odoo>
+	<data>
+	    <record id="ir_cron_create_invoice_from_queue" model="ir.cron">
+	        <field name="name">Create Automatic Invoice from Queued Sale Orders</field>
+	        <field name="interval_number">1</field>
+	        <field name="interval_type">days</field>
+	        <field name="numbercall">-1</field>
+	        <field name="nextcall" eval="(DateTime.now().replace(hour=11, minute=0, second=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')" />
+	        <field name="doall" eval="False"/>
+	        <field name="model_id" ref="model_sale_order"/>
+	        <field name="code">model.create_invoice_from_queue()</field>
+	        <field name="state">code</field>
+	    </record>
+	</data>
+</odoo>
+

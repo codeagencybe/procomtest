@@ -1,0 +1,80 @@
+<odoo>
+ 	<data>
+        <record model="ir.ui.view" id="view_sale_order_tree">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                	<field name="print_state" decoration-success="print_state == 'printed'" decoration-warning="print_state == 'not-printed'" widget="badge" />
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_sale_quotation_tree">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                	<field name="print_state" decoration-success="print_state == 'printed'" decoration-warning="print_state == 'not-printed'" widget="badge" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_sale_quotation_form">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="tag_ids" position="after">
+                	<field name="print_state"/>
+                </field>
+            </field>
+        </record>
+        <record id="sale.sale_order_view_search_inherit_quotation" model="ir.ui.view">
+            <field name="name">sale.order.search.inherit.quotation</field>
+            <field name="model">sale.order</field>
+            <field name="mode">primary</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='my_sale_orders_filter']" position="replace">
+                    <field name="campaign_id"/>
+                    <separator/>
+                    <filter string="My Quotations" name="my_quotation" domain="[('user_id', '=', uid)]"/>
+                    <separator/>
+                    <filter string="Quotations" name="draft" domain="[('state','in',('draft', 'sent'))]"/>
+                    <filter string="Sales Orders" name="sales" domain="[('state','in',('sale','done'))]"/>
+                    <separator/>
+                    <filter string="Create Date" name="filter_create_date" date="create_date"/>
+                    <separator/>
+                    <filter string="Printed" name="printed" domain="[('print_state','=','printed')]" />
+                    <filter string="Not-Printed" name="not_printed" domain="[('print_state','=','not-printed')]" />
+                    <separator/>
+                </xpath>
+            </field>
+        </record>
+        <record id="sale.sale_order_view_search_inherit_sale" model="ir.ui.view">
+            <field name="name">sale.order.search.inherit.sale</field>
+            <field name="model">sale.order</field>
+            <field name="mode">primary</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='my_sale_orders_filter']" position="after">
+                    <separator/>
+                    <filter string="To Invoice" name="to_invoice" domain="[('invoice_status','=','to invoice')]" />
+                    <filter string="To Upsell" name="upselling" domain="[('invoice_status','=','upselling')]" />
+                    <separator/>
+                    <filter string="Order Date" name="order_date" date="date_order"/>
+                    <separator/>
+                    <filter string="Printed" name="printed" domain="[('print_state','=','printed')]" />
+                    <filter string="Not-Printed" name="not_printed" domain="[('print_state','=','not-printed')]" />
+                    <separator/>
+                </xpath>
+            </field>
+        </record>
+
+  	</data>
+</odoo>

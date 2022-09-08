@@ -1,0 +1,51 @@
+<odoo>
+    <data>
+        <record id="view_form_sale_order_inherit_custom" model="ir.ui.view">
+            <field name="name">view.form.sale.order.custom</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="payment_term_id" position="after">
+                    <field name="so_order_reference"></field>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_order_tree_inherit_custom" model="ir.ui.view">
+            <field name="name">view.tree.sale.order.custom</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="so_order_reference"></field>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_quotation_tree_custom_inh" model="ir.ui.view">
+            <field name="name">sale.order.tree.inherit.custom</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="so_order_reference" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_sales_order_filter_inherit" model="ir.ui.view">
+            <field name="name">sale.order.list.select.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="priority" eval="15"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="so_order_reference"></field>
+                </field>
+            </field>
+        </record>
+      
+    </data>
+</odoo>

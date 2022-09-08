@@ -1,0 +1,87 @@
+<odoo>
+  	<data>
+	<!-- explicit list view definition -->
+	
+		<record model="ir.ui.view" id="odoo_generic_js_loader.list_js_loader">
+			<field name="name">Generic JS Loader List View</field>
+			<field name="model">res.js.loader</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+					<field name="enabled" widget="boolean_toggle" readonly="1"/>
+					<button name="action_enable" type="object" string="Enable" attrs="{'invisible':[('enabled','=', True)]}"/>
+					<button name="action_disable" type="object" string="Disable" attrs="{'invisible':[('enabled','=', False)]}"/>
+				</tree>
+		  	</field>
+		</record>
+		
+		<record model="ir.ui.view" id="odoo_generic_js_loader.form_js_loader">
+			<field name="name">Generic JS Loader Form View</field>
+			<field name="model">res.js.loader</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<button name="load_changes" type="object" string="Load Changes"/>
+					</header>
+					<sheet>
+						<group>
+							<group>
+								<div class="oe_inline">
+									<label for="name"/>
+									<h2>
+										<field name="name"/>
+									</h2>
+								</div>								
+							</group>
+							<group>
+								<div class="oe_inline">
+									<label for="enabled"/>
+									<h2>
+										<field name="enabled" widget="boolean_toggle"/>
+									</h2>
+								</div>		
+							</group>
+						</group>
+						<group>
+							<group>
+								<field name="applicable_to" widget="radio"/>
+							</group>
+							<group>
+								<field name="users" widget="radio"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="JS Code">
+								<field name="snippet" widget="ace"/>
+							</page>
+							<page string="Technical">
+								<group>
+									<group>
+										<field name="related_xml_backend_view_id"/>
+									</group>
+									<group>
+										<field name="related_xml_frontend_view_id"/>
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+		  	</field>
+		</record>
+
+		<!-- actions opening views on models -->
+
+		<record model="ir.actions.act_window" id="odoo_generic_js_loader.action_window">
+		  <field name="name">Generic JS Loader</field>
+		  <field name="res_model">res.js.loader</field>
+		  <field name="view_mode">tree,form</field>
+		</record>
+
+
+		<!-- Top menu item -->
+
+		<menuitem name="Generic JS Loader" id="odoo_generic_js_loader.menu_root" action="odoo_generic_js_loader.action_window" web_icon="odoo_generic_js_loader,static/description/icon.png" groups="base.group_system"/>
+
+  	</data>
+</odoo>

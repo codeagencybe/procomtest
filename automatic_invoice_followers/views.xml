@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+       	
+        <record model="ir.ui.view" id="view_res_partner_form">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="vat" position="after">
+                    <field name="send_invoice_copy" attrs="{'invisible':[('parent_id','=', False)]}"/>
+                </field>
+                <xpath expr="//field[@name='child_ids']/kanban/templates//field[@name='name']" position="after">
+                    <field name="send_invoice_copy" invisible="1"/>
+                    <button class="btn btn-link" type="object" attrs="{'invisible':[('send_invoice_copy','=',False)]}" name="action_uncheck_invoice_copy_status">
+                        <i class="fa fa-check-square-o" />
+                    </button>
+                    <button class="btn btn-link" type="object" name="action_check_invoice_copy_status" attrs="{'invisible':[('send_invoice_copy','=',True)]}">
+                        <i class="fa fa-square-o" />
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
